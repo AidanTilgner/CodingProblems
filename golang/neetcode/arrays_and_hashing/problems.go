@@ -1,6 +1,9 @@
 package arraysandhashing
 
-import u "neetcode-solutions/utils"
+import (
+	u "neetcode-solutions/utils"
+	"sort"
+)
 
 // ValidAnagram takes two strings, and returns true if the second string
 // is an anagram of the first string.
@@ -53,5 +56,27 @@ func GroupAnagrams(words []string) [][]string {
 }
 
 func TopKFrequentElements(nums []int, k int) []int {
+	mappings := make(map[int]int)
 
+	for _, n := range nums {
+		mappings[n]++
+	}
+
+	var resultsWithTotals [][2]int
+
+	for v, n := range mappings {
+		resultsWithTotals = append(resultsWithTotals, [2]int{n, v})
+	}
+
+	sort.Slice(resultsWithTotals, func(i, j int) bool { // n log n worst case
+		return resultsWithTotals[i][0] > resultsWithTotals[j][0]
+	})
+
+	var results []int
+
+	for i := 0; i < k; i++ {
+		results = append(results, resultsWithTotals[i][1])
+	}
+
+	return results
 }
