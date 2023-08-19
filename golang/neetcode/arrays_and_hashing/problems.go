@@ -1,6 +1,7 @@
 package arraysandhashing
 
 import (
+	"fmt"
 	u "neetcode-solutions/utils"
 	"sort"
 )
@@ -76,6 +77,47 @@ func TopKFrequentElements(nums []int, k int) []int {
 
 	for i := 0; i < k; i++ {
 		results = append(results, resultsWithTotals[i][1])
+	}
+
+	return results
+}
+
+func ProductOfArrayExceptSelf(nums []int) []int {
+	totalReal := 1
+	totalWithoutSingleZero := 1
+	foundZero := false
+
+	for _, v := range nums {
+		totalReal *= v
+		if v == 0 && !foundZero {
+			foundZero = true
+			continue
+		}
+		totalWithoutSingleZero *= v
+	}
+
+	if totalWithoutSingleZero == 0 {
+		return make([]int, len(nums))
+	}
+
+	if foundZero {
+		fmt.Printf("Found zero btw\n")
+		results := make([]int, len(nums))
+
+		for i, v := range nums {
+			if v == 0 {
+				results[i] = totalWithoutSingleZero
+				continue
+			}
+			results[i] = 0
+		}
+
+		return results
+	}
+
+	results := make([]int, len(nums))
+	for i, v := range nums {
+		results[i] = totalReal / v
 	}
 
 	return results

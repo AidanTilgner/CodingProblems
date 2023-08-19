@@ -34,3 +34,20 @@ func TestTopKFrequentElements(t *testing.T) {
 		t.Errorf("Expected [1, 2], got %d", val)
 	}
 }
+
+func TestProductOfArrayExceptSelf(t *testing.T) {
+	cases := [][][]int{
+		{{1, 2, 3, 4}, {24, 12, 8, 6}},
+		{{-1, 1, 0, -3, 3}, {0, 0, 9, 0, 0}},
+	}
+
+	for _, v := range cases {
+		val := ProductOfArrayExceptSelf(v[0])
+
+		equal := reflect.DeepEqual(v[1], val)
+
+		if !equal {
+			t.Errorf("Expected %v got %v", v[1], val)
+		}
+	}
+}
