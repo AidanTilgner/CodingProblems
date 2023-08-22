@@ -122,3 +122,7 @@ func ProductOfArrayExceptSelf(nums []int) []int {
 
 	return results
 }
+
+func ValidSodoku([][]byte) bool {
+	return false
+}
