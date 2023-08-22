@@ -25,4 +25,12 @@ let () =
 
   print_endline "Is palindrome: [ 'a'; 'b'; 'a'; ]";
   Beginner.is_palindrome [ "a"; "b"; "a" ] |> string_of_bool |> print_endline;
-  print_endline "\n"
+  print_endline "\n";
+
+  print_endline
+    "Run line encoding: ['a'; 'a'; 'a'; 'a'; 'b'; 'c'; 'c'; 'a'; 'a'; 'd'; \
+     'e'; 'e'; 'e'; 'e']";
+  Beginner.run_length_encode
+    [ "a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "e"; "e"; "e"; "e" ]
+  |> List.iter (fun (count, value) -> Printf.printf "(%d, %s) " count value);
+  print_newline ()

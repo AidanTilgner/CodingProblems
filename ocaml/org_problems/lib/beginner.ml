@@ -27,3 +27,14 @@ let rev l =
 let is_palindrome l =
   let list = rev l in
   list = l
+
+(** [run_length_encode l] returns a list of tuples which represent a run length encoding (https://en.wikipedia.org/wiki/Run-length_encoding) *)
+let run_length_encode list =
+  let rec aux count acc = function
+    | [] -> []
+    | [ x ] -> (count + 1, x) :: acc
+    | a :: (b :: _ as t) ->
+        if a = b then aux (count + 1) acc t else aux 0 ((count + 1, a) :: acc) t
+  in
+
+  aux 0 [] list
