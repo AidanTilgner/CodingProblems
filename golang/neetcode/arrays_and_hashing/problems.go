@@ -123,6 +123,44 @@ func ProductOfArrayExceptSelf(nums []int) []int {
 	return results
 }
 
-func ValidSodoku([][]byte) bool {
-	return false
+func ValidSudoku(board [][]byte) bool { // todo: use fixed arrays instead to reduce space complexity, remove dynamic resizes, etc
+	rowSet := make(map[int]map[int]struct{})
+	columnSet := make(map[int]map[int]struct{})
+	ninthSet := make(map[string]map[int]struct{})
+
+	for r, row := range board {
+		for c, rSquare := range row {
+			if rSquare == '.' {
+				continue
+			}
+			numSquare := int(rSquare - '0') // Convert to actual integer value
+			if numSquare < 1 || numSquare > 9 {
+				return false
+			}
+			if rowSet[r] == nil {
+				rowSet[r] = make(map[int]struct{})
+			}
+			if _, exists := rowSet[r][numSquare]; exists {
+				return false
+			}
+			rowSet[r][numSquare] = struct{}{}
+			if columnSet[c] == nil {
+				columnSet[c] = make(map[int]struct{})
+			}
+			if _, exists := columnSet[c][numSquare]; exists {
+				return false
+			}
+			columnSet[c][numSquare] = struct{}{}
+			nnIndex := fmt.Sprintf("%d%d", r/3, c/3)
+			if ninthSet[nnIndex] == nil {
+				ninthSet[nnIndex] = make(map[int]struct{})
+			}
+			if _, exists := ninthSet[nnIndex][numSquare]; exists {
+				return false
+			}
+			ninthSet[nnIndex][numSquare] = struct{}{}
+		}
+	}
+
+	return true
 }

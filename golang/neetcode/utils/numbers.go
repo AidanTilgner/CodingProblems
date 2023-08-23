@@ -8,3 +8,7 @@ func GetDescendingNumbers(nums []int) []int {
 	})
 	return nums
 }
+
+func IsBetween(n1 int, n2 int, n3 int) bool {
+	return n1 <= n3 && n1 >= n2
+}
