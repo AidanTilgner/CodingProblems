@@ -51,3 +51,14 @@ func TestProductOfArrayExceptSelf(t *testing.T) {
 		}
 	}
 }
+
+func TestLongestConsecutiveSequence(t *testing.T) {
+	case1 := []int{100, 4, 200, 1, 3, 2}
+	res := LongestConsecutiveSequence(case1)
+	if res != 4 {
+		t.Errorf(
+			"Expected length 4 got %v",
+			res,
+		)
+	}
+}

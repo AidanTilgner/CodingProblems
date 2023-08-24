@@ -164,3 +164,30 @@ func ValidSudoku(board [][]byte) bool { // todo: use fixed arrays instead to red
 
 	return true
 }
+
+func LongestConsecutiveSequence(nums []int) int {
+	numSet := make(map[int]struct{}, len(nums))
+	for _, n := range nums {
+		numSet[n] = struct{}{}
+	}
+
+	longest := 0
+
+	for _, number := range nums {
+		if _, exists := numSet[number-1]; !exists {
+			length := 1
+
+			next := number + 1
+			for _, exists := numSet[next]; exists; next++ {
+				length++
+				_, exists = numSet[next+1]
+			}
+
+			if length > longest {
+				longest = length
+			}
+		}
+	}
+
+	return longest
+}
