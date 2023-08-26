@@ -1,6 +1,7 @@
 package twopointers
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -32,4 +33,13 @@ func TestTwoSumTwoInputArraySorted(t *testing.T) {
 	if !reflect.DeepEqual(answer3, []int{1, 2}) {
 		t.Errorf("Expected [1, 2], got: %v", answer3)
 	}
+}
+
+func TestThreeSum(t *testing.T) {
+	case1 := []int{-1, 0, 1, 2, -1, -4}
+	expect1 := [][]int{{-1, 0, 1}, {-1, -1, 2}}
+
+	result := ThreeSum(case1)
+
+	fmt.Printf("Got %v. Expected: %v\n\n", result, expect1)
 }
